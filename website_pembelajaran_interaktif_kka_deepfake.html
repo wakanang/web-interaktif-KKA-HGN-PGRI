@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misi Detektif AI: Ungkap Rahasia Deepfake! | SMP Negeri 58 Palembang</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1565C0',
+                            darkblue: '#0d47a1',
+                            yellow: '#FFD54F',
+                            red: '#EF5350',
+                            bg: '#F8FAFC',
+                            text: '#1E293B'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles for print and animations */
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white; color: black; }
+        }
+        .robot-bounce {
+            animation: bounce 2s infinite ease-in-out;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .pulse-glow {
+            animation: pulseGlow 2s infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(21, 101, 192, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(255, 213, 79, 0.8); }
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1565C0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- TOP BAR (Mobile Header) -->
+    <header class="bg-brand-blue text-white p-4 lg:hidden flex justify-between items-center shadow-md sticky top-0 z-50 no-print">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-brand-blue font-bold text-xl shadow">
+                <i class="fa-solid fa-user-secret"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-base leading-tight">Misi Detektif AI</h1>
+                <p class="text-xs text-brand-yellow">SMPN 58 Palembang</p>
+            </div>
+        </div>
+        <button id="toggleSidebar" class="text-white text-2xl focus:outline-none p-2 rounded hover:bg-blue-700">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </header>
+
+    <div class="flex flex-1 relative">
+        <!-- SIDEBAR NAVIGATION -->
+        <aside id="sidebar" class="bg-slate-900 text-slate-200 w-72 flex-shrink-0 flex flex-col justify-between fixed lg:sticky top-0 h-screen z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl no-print">
+            <div class="flex flex-col h-full">
+                <!-- Sidebar Header -->
+                <div class="p-5 bg-slate-950 border-b border-slate-800 flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-tr from-blue-600 to-yellow-400 rounded-xl flex items-center justify-center text-white text-2xl shadow-lg">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div>
+                        <h2 class="font-extrabold text-white text-sm tracking-wide">SMPN 58 PALEMBANG</h2>
+                        <p class="text-xs text-amber-400 font-semibold">KKA Class VIII Ganjil</p>
+                    </div>
+                </div>
+
+                <!-- Student Status Brief -->
+                <div class="px-5 py-3 bg-slate-800/60 border-b border-slate-800 flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold" id="sideStudentAvatar">
+                        ?
+                    </div>
+                    <div class="overflow-hidden">
+                        <p class="text-xs text-slate-400 font-medium truncate">Detektif Active:</p>
+                        <p class="text-sm font-bold text-amber-300 truncate" id="sideStudentName">Belum diisi</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <nav class="flex-1 overflow-y-auto p-4 space-y-1 text-sm font-medium">
+                    <button onclick="navigateTo('dashboard')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="dashboard">
+                        <i class="fa-solid fa-house w-5 text-blue-400"></i><span>Dashboard Utama</span>
+                    </button>
+                    <button onclick="navigateTo('identitas')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="identitas">
+                        <i class="fa-solid fa-id-card w-5 text-yellow-400"></i><span>Identitas Siswa</span>
+                    </button>
+                    <button onclick="navigateTo('kegiatan-awal')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="kegiatan-awal">
+                        <i class="fa-solid fa-compass w-5 text-emerald-400"></i><span>Kegiatan Awal (10')</span>
+                    </button>
+                    <button onclick="navigateTo('stimulus')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="stimulus">
+                        <i class="fa-solid fa-circle-play w-5 text-red-400"></i><span>Stimulus Deepfake (8')</span>
+                    </button>
+                    <button onclick="navigateTo('identifikasi')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="identifikasi">
+                        <i class="fa-solid fa-lightbulb w-5 text-amber-300"></i><span>Identifikasi Masalah (5')</span>
+                    </button>
+                    <button onclick="navigateTo('materi')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="materi">
+                        <i class="fa-solid fa-book-open w-5 text-indigo-400"></i><span>Materi Deepfake (7')</span>
+                    </button>
+                    <button onclick="navigateTo('praktik-ai')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="praktik-ai">
+                        <i class="fa-solid fa-wand-magic-sparkles w-5 text-pink-400"></i><span>Praktik Gambar AI (12')</span>
+                    </button>
+                    <button onclick="navigateTo('deteksi-ai')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="deteksi-ai">
+                        <i class="fa-solid fa-magnifying-glass-chart w-5 text-teal-400"></i><span>Deteksi Gambar AI (8')</span>
+                    </button>
+                    <button onclick="navigateTo('game')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="game">
+                        <i class="fa-solid fa-gamepad w-5 text-yellow-500"></i><span>Game Fakta atau AI (8')</span>
+                    </button>
+                    <button onclick="navigateTo('presentasi')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="presentasi">
+                        <i class="fa-solid fa-users-rectangle w-5 text-sky-400"></i><span>Presentasi Kelompok (5')</span>
+                    </button>
+                    <button onclick="navigateTo('kuis')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="kuis">
+                        <i class="fa-solid fa-graduation-cap w-5 text-purple-400"></i><span>Kuis Interaktif (10')</span>
+                    </button>
+                    <button onclick="navigateTo('refleksi')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="refleksi">
+                        <i class="fa-solid fa-heart-pulse w-5 text-rose-400"></i><span>Refleksi AHA! (7')</span>
+                    </button>
+                    <button onclick="navigateTo('penutup')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="penutup">
+                        <i class="fa-solid fa-flag-checkered w-5 text-orange-400"></i><span>Kegiatan Penutup</span>
+                    </button>
+                    <button onclick="navigateTo('hasil-belajar')" class="nav-item w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white transition" data-section="hasil-belajar">
+                        <i class="fa-solid fa-file-invoice w-5 text-green-400"></i><span>Hasil Belajar & WA</span>
+                    </button>
+                </nav>
+
+                <!-- Sidebar Footer -->
+                <div class="p-4 border-t border-slate-800 text-xs text-slate-400 text-center">
+                    <p>© 2026 SMPN 58 Palembang</p>
+                    <p class="text-[10px] text-slate-500 mt-1">Deepfake Detective Learning App</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-1 bg-slate-50 p-4 lg:p-8 overflow-y-auto max-w-full">
+            
+            <!-- Global Header Bar in Main Content -->
+            <div class="mb-6 bg-white p-4 rounded-2xl shadow-sm border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4 no-print">
+                <div class="flex items-center space-x-3">
+                    <img src="https://placehold.co/50x50/1565C0/FFFFFF?text=SMP58" alt="Logo SMPN 58" class="w-10 h-10 rounded-lg shadow">
+                    <div>
+                        <h2 class="text-base font-bold text-slate-800 leading-tight">PEMBELAJARAN INTERAKTIF KKA</h2>
+                        <p class="text-xs text-slate-500">Materi: Deepfake — Mengenali, Membuat & Mendeteksi secara Etis</p>
+                    </div>
+                </div>
+
+                <!-- Global Progress Bar -->
+                <div class="w-full md:w-64 bg-slate-100 rounded-full h-4 p-0.5 border border-slate-200 shadow-inner">
+                    <div id="globalProgressBar" class="bg-gradient-to-r from-blue-600 to-amber-400 h-full rounded-full text-[10px] font-bold text-white flex items-center justify-center transition-all duration-500" style="width: 5%">
+                        5%
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 1: DASHBOARD UTAMA -->
+            <section id="sec-dashboard" class="space-y-6">
+                <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 rounded-3xl p-6 lg:p-10 text-white relative overflow-hidden shadow-xl border border-blue-700">
+                    <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="relative z-10 grid md:grid-cols-3 gap-6 items-center">
+                        <div class="md:col-span-2 space-y-4">
+                            <span class="bg-amber-400 text-blue-950 font-extrabold text-xs px-3 py-1 rounded-full uppercase tracking-wider inline-block shadow">
+                                <i class="fa-solid fa-shield-halved mr-1"></i> Modul Resmi KKA SMP Kelas VIII
+                            </span>
+                            <h1 class="text-3xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+                                Misi Detektif AI: <br><span class="text-amber-300">Ungkap Rahasia Deepfake!</span>
+                            </h1>
+                            <p class="text-blue-100 text-sm lg:text-base leading-relaxed">
+                                Halo Detektif Muda SMPN 58 Palembang! Mari kita selidiki teknologi di balik kecerdasan buatan, belajar membuat gambar AI dengan etis, dan melatih mata kritis kita untuk mendeteksi rekayasa digital!
+                            </p>
+
+                            <div class="pt-2 flex flex-wrap gap-3">
+                                <button onclick="navigateTo('identitas')" class="bg-amber-400 hover:bg-amber-300 text-slate-900 font-extrabold px-6 py-3 rounded-xl shadow-lg hover:shadow-amber-400/50 transition transform hover:-translate-y-0.5 flex items-center space-x-2">
+                                    <span>Mulai Misi Sekarang</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                                <button onclick="navigateTo('materi')" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 font-semibold px-5 py-3 rounded-xl transition backdrop-blur-sm">
+                                    <i class="fa-solid fa-book-open mr-2"></i>Lihat Ringkasan Materi
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Robot Mascot Visual -->
+                        <div class="flex flex-col items-center justify-center text-center p-4 bg-white/10 rounded-2xl backdrop-blur-md border border-white/20">
+                            <div class="w-28 h-28 bg-gradient-to-tr from-amber-300 to-yellow-500 rounded-full flex items-center justify-center text-blue-950 text-5xl mb-3 shadow-lg robot-bounce">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <h3 class="font-bold text-amber-300 text-lg">RoboDetektif AI</h3>
+                            <p class="text-xs text-blue-100 italic mt-1 font-medium">"Jadilah kreator yang kreatif dan detektif digital yang kritis!"</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium">Alokasi Waktu</p>
+                            <p class="text-lg font-bold text-slate-800">2 × 40 Menit</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium">Model Belajar</p>
+                            <p class="text-lg font-bold text-slate-800">Discovery Learning</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium">Skor Game & Kuis</p>
+                            <p class="text-lg font-bold text-slate-800" id="dashScoreDisplay">0 / 160</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 font-medium">Lencana Profil</p>
+                            <p class="text-sm font-bold text-slate-800" id="dashBadgeDisplay">Calon Detektif</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profil Lulusan Card -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h3 class="text-base font-bold text-slate-800 mb-4 flex items-center">
+                        <i class="fa-solid fa-star text-amber-400 mr-2"></i> Dimensi Profil Lulusan yang Dikembangkan
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                        <div class="p-3 bg-blue-50 rounded-xl border border-blue-100">
+                            <i class="fa-solid fa-brain text-blue-600 text-xl mb-1"></i>
+                            <p class="text-xs font-bold text-blue-900">Penalaran Kritis</p>
+                        </div>
+                        <div class="p-3 bg-yellow-50 rounded-xl border border-yellow-100">
+                            <i class="fa-solid fa-lightbulb text-amber-600 text-xl mb-1"></i>
+                            <p class="text-xs font-bold text-amber-900">Kreativitas</p>
+                        </div>
+                        <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-100">
+                            <i class="fa-solid fa-people-group text-emerald-600 text-xl mb-1"></i>
+                            <p class="text-xs font-bold text-emerald-900">Kolaborasi</p>
+                        </div>
+                        <div class="p-3 bg-purple-50 rounded-xl border border-purple-100">
+                            <i class="fa-solid fa-comments text-purple-600 text-xl mb-1"></i>
+                            <p class="text-xs font-bold text-purple-900">Komunikasi</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: IDENTITAS SISWA -->
+            <section id="sec-identitas" class="hidden space-y-6">
+                <div class="bg-white p-6 lg:p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex items-center space-x-3 border-b border-slate-100 pb-4 mb-6">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-2xl font-bold">
+                            <i class="fa-solid fa-id-card"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-800">Formulir Identitas Detektif AI</h2>
+                            <p class="text-xs text-slate-500">Lengkapi data diri sebelum memulai investigasi pembelajaran</p>
+                        </div>
+                    </div>
+
+                    <form id="formIdentitas" onsubmit="saveIdentitas(event)" class="space-y-4 max-w-2xl">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nama Lengkap Siswa *</label>
+                                <input type="text" id="inputNama" required placeholder="Contoh: Muhammad Andi" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm font-medium">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Kelas *</label>
+                                <select id="inputKelas" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm font-medium">
+                                    <option value="">-- Pilih Kelas VIII --</option>
+                                    <option value="VIII.1">VIII.1</option>
+                                    <option value="VIII.2">VIII.2</option>
+                                    <option value="VIII.3">VIII.3</option>
+                                    <option value="VIII.4">VIII.4</option>
+                                    <option value="VIII.5">VIII.5</option>
+                                    <option value="VIII.6">VIII.6</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nomor Absen *</label>
+                                <input type="number" id="inputAbsen" min="1" max="40" required placeholder="Contoh: 15" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm font-medium">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Nama Kelompok *</label>
+                                <input type="text" id="inputKelompok" required placeholder="Contoh: Kelompok Cyber Shield 1" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm font-medium">
+                            </div>
+                        </div>
+
+                        <div class="pt-4 flex flex-wrap gap-3">
+                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition flex items-center space-x-2">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                <span>Simpan Identitas</span>
+                            </button>
+                            <button type="button" onclick="navigateTo('kegiatan-awal')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-xl shadow transition flex items-center space-x-2">
+                                <span>Lanjut Pembelajaran</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Personal Greeting Box -->
+                    <div id="personalGreeting" class="mt-8 p-6 bg-gradient-to-r from-blue-50 to-amber-50 rounded-2xl border border-blue-200 hidden flex items-center space-x-4">
+                        <div class="w-14 h-14 bg-blue-600 text-amber-300 rounded-full flex items-center justify-center text-3xl font-bold shadow">
+                            <i class="fa-solid fa-user-check"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-extrabold text-blue-900" id="greetingText">Halo, Detektif!</h3>
+                            <p class="text-xs text-slate-600 mt-1">Data identitasmu telah tersimpan di sistem lokal browser komputer ini.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 3: KEGIATAN AWAL -->
+            <section id="sec-kegiatan-awal" class="hidden space-y-6">
+                <div class="bg-white p-6 lg:p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-compass"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">Tahap 1: Kegiatan Awal</h2>
+                                <p class="text-xs text-slate-500">Berkesadaran dan Bermakna (Persiapan & Orientasi)</p>
+                            </div>
+                        </div>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">Durasi: 10 Menit</span>
+                    </div>
+
+                    <div class="bg-emerald-50 border-l-4 border-emerald-500 p-5 rounded-r-2xl mb-6">
+                        <h3 class="font-bold text-emerald-900 text-lg mb-1">Salam dan Kesiapan Belajar</h3>
+                        <p class="text-sm text-emerald-800 leading-relaxed italic">
+                            "Selamat datang, Detektif AI! Mari belajar menggunakan kecerdasan artifisial dengan kritis, kreatif, dan bertanggung jawab."
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                            <i class="fa-solid fa-hands-praying text-blue-600 text-2xl mb-2"></i>
+                            <h4 class="font-bold text-sm text-slate-800">1. Berdoa</h4>
+                            <p class="text-xs text-slate-500 mt-1">Berdoa bersama sebelum memulakan kegiatan pembelajaran KKA.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                            <i class="fa-solid fa-desktop text-amber-600 text-2xl mb-2"></i>
+                            <h4 class="font-bold text-sm text-slate-800">2. Siapkan Perangkat</h4>
+                            <p class="text-xs text-slate-500 mt-1">Pastikan komputer lab terhubung internet dengan stabil.</p>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                            <i class="fa-solid fa-people-hold text-emerald-600 text-2xl mb-2"></i>
+                            <h4 class="font-bold text-sm text-slate-800">3. Kolaborasi</h4>
+                            <p class="text-xs text-slate-500 mt-1">Bekerja sama aktif dalam kelompok diskusimu.</p>
+                        </div>
+                    </div>
+
+                    <!-- Target Pembelajaran Cards -->
+                    <div class="border border-slate-200 rounded-2xl p-5 bg-slate-50/50 space-y-3">
+                        <h3 class="font-bold text-slate-800 text-base">Tujuan Pembelajaran & Pemahaman Bermakna</h3>
+                        <ul class="space-y-2 text-sm text-slate-700">
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                                <span>Menjelaskan konsep teknologi Deepfake dengan benar.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                                <span>Membuat gambar buatan AI sederhana secara etis menggunakan Bing Image Creator / Gemini AI.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                                <span>Mendeteksi deepfake dengan analisis teknik manual dan bantuan web AI Detector.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fa-solid fa-check text-emerald-500 mt-1"></i>
+                                <span>Merefleksikan dampak sosial serta etika penggunaan teknologi AI di kehidupan sehari-hari.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-4 text-right">
+                        <button onclick="navigateTo('stimulus')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl shadow transition">
+                            Lanjut ke Stimulus Deepfake <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 4: STIMULUS DEEPFAKE -->
+            <section id="sec-stimulus" class="hidden space-y-6">
+                <div class="bg-white p-6 lg:p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-circle-play"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">Tahap 2: Stimulus Video Deepfake</h2>
+                                <p class="text-xs text-slate-500">Amati dan Analisis Video Kasus Rekayasa AI</p>
+                            </div>
+                        </div>
+                        <span class="bg-red-100 text-red-800 text-xs font-bold px-3 py-1 rounded-full">Durasi: 8 Menit</span>
+                    </div>
+
+                    <!-- Video Container -->
+                    <div class="space-y-4">
+                        <div class="bg-slate-900 rounded-2xl p-2 shadow-lg overflow-hidden aspect-video relative flex items-center justify-center text-white">
+                            <!-- Youtube Embed -->
+                            <iframe class="w-full h-full rounded-xl" src="https://www.youtube.com/embed/DDeJ9VRfGV4" title="Stimulus Deepfake Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+
+                        <div class="flex justify-end">
+                            <a href="https://youtu.be/DDeJ9VRfGV4" target="_blank" class="text-xs bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold px-4 py-2 rounded-lg transition inline-flex items-center">
+                                <i class="fa-solid fa-arrow-up-right-from-square mr-1.5"></i> Buka Video Stimulus di YouTube
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Pre-Hypothesis -->
+                    <div class="mt-8 bg-blue-50 p-6 rounded-2xl border border-blue-200 space-y-4">
+                        <h3 class="font-bold text-blue-950 text-base">Pertanyaan Awal Sebelum Analisis Lanjut:</h3>
+                        <p class="text-sm text-blue-900">Menurut kalian, apakah video di atas asli, dibuat menggunakan AI, atau belum dapat dipastikan?</p>
+                        
+                        <div class="flex flex-wrap gap-3">
+                            <button onclick="submitHypothesis('Kemungkinan Asli')" class="btn-hypo bg-white hover:bg-emerald-50 text-emerald-700 border border-emerald-300 font-bold px-4 py-2.5 rounded-xl transition text-sm">
+                                <i class="fa-regular fa-circle-check mr-1"></i> Kemungkinan Asli
+                            </button>
+                            <button onclick="submitHypothesis('Kemungkinan AI / Manipulasi')" class="btn-hypo bg-white hover:bg-red-50 text-red-700 border border-red-300 font-bold px-4 py-2.5 rounded-xl transition text-sm">
+                                <i class="fa-solid fa-triangle-exclamation mr-1"></i> Kemungkinan AI / Manipulasi
+                            </button>
+                            <button onclick="submitHypothesis('Belum Yakin')" class="btn-hypo bg-white hover:bg-amber-50 text-amber-700 border border-amber-300 font-bold px-4 py-2.5 rounded-xl transition text-sm">
+                                <i class="fa-regular fa-circle-question mr-1"></i> Belum Yakin
+                            </button>
+                        </div>
+
+                        <div id="hypoFeedback" class="hidden p-4 bg-white rounded-xl text-sm font-medium border border-blue-200 text-blue-900">
+                            <!-- JS Filled -->
+                        </div>
+                    </div>
+
+                    <!-- Observation Input -->
+                    <div class="space-y-4 pt-4">
+                        <h4 class="font-bold text-slate-800 text-sm">Catatan Pengamatan Awal Kelompok:</h4>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">Bagian mana yang terlihat meyakinkan?</label>
+                                <textarea id="stimulusMeyakinkan" rows="3" class="w-full p-3 text-sm rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Tulis bagian video yang nampak nyata..."></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 mb-1">Adakah kejanggalan visual/suara yang kalian amati?</label>
+                                <textarea id="stimulusKejanggalan" rows="3" class="w-full p-3 text-sm rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Tulis kejanggalan gerakan bibir, kedipan mata, atau suara..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 text-right">
+                        <button onclick="navigateTo('identifikasi')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl shadow transition">
+                            Lanjut ke Identifikasi Masalah <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 5: IDENTIFIKASI MASALAH -->
+            <section id="sec-identifikasi" class="hidden space-y-6">
+                <div class="bg-white p-6 lg:p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-lightbulb"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">Tahap 3: Identifikasi Masalah</h2>
+                                <p class="text-xs text-slate-500">Merumuskan Pertanyaan & Hipotesis Penelitian</p>
+                            </div>
+                        </div>
+                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">Durasi: 5 Menit</span>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-amber-50 p-4 rounded-xl text-xs text-amber-900 border border-amber-200">
+                            <strong><i class="fa-solid fa-circle-info mr-1"></i> Petunjuk Discovery Learning:</strong> Setelah mengamati video stimulus, rumuskan pertanyaan kritis utama kelompokmu! Misalnya: <em>"Bagaimana cara membedakan video/gambar asli dan hasil kecerdasan buatan?"</em>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">Rumusan Masalah Utama Kelompok *</label>
+                            <textarea id="rumusanMasalah" rows="3" required class="w-full p-4 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm" placeholder="Tuliskan pertanyaan masalah utama kelompok di sini..."></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-1">Dugaan Sementara / Hipotesis *</label>
+                            <textarea id="hipotesisKelompok" rows="3" required class="w-full p-4 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm" placeholder="Tuliskan dugaan awal kelompok mengenai solusi / jawaban masalah tersebut..."></textarea>
+                        </div>
+
+                        <div class="pt-2 flex justify-between items-center">
+                            <button onclick="saveIdentifikasi()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-xl shadow transition flex items-center space-x-2">
+                                <i class="fa-solid fa-check"></i>
+                                <span>Simpan Hasil Identifikasi</span>
+                            </button>
+
+                            <button onclick="navigateTo('materi')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl shadow transition">
+                                Penguatan Materi Deepfake <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 6: MATERI DEEPFAKE -->
+            <section id="sec-materi" class="hidden space-y-6">
+                <div class="bg-white p-6 lg:p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-book-open"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">Tahap 4: Materi Penguatan Guru — Mengenali Deepfake</h2>
+                                <p class="text-xs text-slate-500">Konsep AI, Cara Kerja, Jenis, Manfaat, Risiko, Etika & Deteksi</p>
+                            </div>
+                        </div>
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full">Durasi: 7 Menit</span>
+                    </div>
+
+                    <!-- Accordion or Tabbed Content -->
+                    <div class="space-y-6">
+                        <!-- Concept AI & Deepfake -->
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="p-5 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl border border-blue-200">
+                                <h3 class="font-extrabold text-blue-900 text-base mb-2 flex items-center">
+                                    <i class="fa-solid fa-microchip mr-2 text-blue-600"></i> Apa itu Kecerdasan Artifisial (AI)?
+                                </h3>
+                                <p class="text-xs text-slate-700 leading-relaxed">
+                                    <strong>Artificial Intelligence (AI)</strong> adalah teknologi komputer yang dirancang untuk meniru kemampuan berpikir dan belajar manusia, seperti mengenali wajah, memahami percakapan, atau menghasilkan karya gambar dan suara baru.
+                                </p>
+                            </div>
+
+                            <div class="p-5 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl border border-amber-200">
+                                <h3 class="font-extrabold text-amber-900 text-base mb-2 flex items-center">
+                                    <i class="fa-solid fa-mask mr-2 text-amber-600"></i> Apa itu Deepfake?
+                                </h3>
+                                <p class="text-xs text-slate-700 leading-relaxed">
+                                    <strong>Deepfake</strong> (kombinasi <em>Deep Learning</em> + <em>Fake</em>) adalah konten foto, rekaman suara, atau video buatan AI yang memanipulasi identitas asli seseorang agar nampak mengucapkan atau melakukan sesuatu yang sebenarnya tidak terjadi.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Diagrams Workflow -->
+                        <div class="bg-slate-900 text-white p-6 rounded-2xl shadow">
+                            <h3 class="font-bold text-amber-300 text-sm uppercase mb-4 tracking-wider text-center">Diagram Alur Cara Kerja Sederhana Deepfake</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-center">
+                                <div class="p-3 bg-slate-800 rounded-xl border border-slate-700">
+                                    <div class="text-blue-400 text-xl font-bold mb-1">1</div>
+                                    <p class="text-xs font-semibold">Pengumpulan Data Visual/Audio</p>
+                                </div>
+                                <div class="p-3 bg-slate-800 rounded-xl border border-slate-700">
+                                    <div class="text-amber-400 text-xl font-bold mb-1">2</div>
+                                    <p class="text-xs font-semibold">Model AI Mempelajari Pola</p>
+                                </div>
+                                <div class="p-3 bg-slate-800 rounded-xl border border-slate-700">
+                                    <div class="text-emerald-400 text-xl font-bold mb-1">3</div>
+                                    <p class="text-xs font-semibold">Sintesis & Manipulasi Konten</p>
+                                </div>
+                                <div class="p-3 bg-slate-800 rounded-xl border border-slate-700">
+                                    <div class="text-rose-400 text-xl font-bold mb-1">4</div>
+                                    <p class="text-xs font-semibold">Hasil Video/Gambar Deepfake</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5 Jenis Konten Deepfake -->
+                        <div class="space-y-3">
+                            <h3 class="font-bold text-slate-800 text-base">5 Jenis Bentuk Konten Manipulasi AI</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-5 gap-3">
+                                <div class="p-3 bg-white border border-slate-200 rounded-xl text-center shadow-sm">
+                                    <i class="fa-solid fa-image text-blue-500 text-2xl mb-2"></i>
+                                    <p class="text-xs font-bold text-slate-800">Manipulasi Wajah Foto</p>
+                                </div>
+                                <div class="p-3 bg-white border border-slate-200 rounded-xl text-center shadow-sm">
+                                    <i class="fa-solid fa-repeat text-indigo-500 text-2xl mb-2"></i>
+                                    <p class="text-xs font-bold text-slate-800">Face Swap Video</p>
+                                </div>
+                                <div class="p-3 bg-white border border-slate-200 rounded-xl text-center shadow-sm">
+                                    <i class="fa-solid fa-lips text-pink-500 text-2xl mb-2"></i>
+                                    <p class="text-xs font-bold text-slate-800">Lip-Sync Alteration</p>
+                                </div>
+                                <div class="p-3 bg-white border border-slate-200 rounded-xl text-center shadow-sm">
+                                    <i class="fa-solid fa-microphone-lines text-purple-500 text-2xl mb-2"></i>
+                                    <p class="text-xs font-bold text-slate-800">Kloning Suara AI</p>
+                                </div>
+                                <div class="p-3 bg-white border border-slate-200 rounded-xl text-center shadow-sm">
+                                    <i class="fa-solid fa-wand-magic text-emerald-500 text-2xl mb-2"></i>
+                                    <p class="text-xs font-bold text-slate-800">Gambar AI Generatif</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Manfaat vs Risiko -->
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-emerald-50 p-5 rounded-2xl border border-emerald-200">
+                                <h4 class="font-bold text-emerald-900 text-sm mb-2 flex items-center">
+                                    <i class="fa-solid fa-circle-check text-emerald-600 mr-2"></i> Manfaat Positif AI Visual
+                                </h4>
+                                <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+                                    <li>Efek visual sinematik dan industri perfilman modern</li>
+                                    <li>Simulasi media pembelajaran sejarah & sains</li>
+                                    <li>Restorasi foto bersejarah keluarga atau museum</li>
+                                </ul>
+                            </div>
+                            <div class="bg-rose-50 p-5 rounded-2xl border border-rose-200">
+                                <h4 class="font-bold text-rose-900 text-sm mb-2 flex items-center">
+                                    <i class="fa-solid fa-triangle-exclamation text-rose-600 mr-2"></i> Risiko & Bahaya Penyalahgunaan
+                                </h4>
+                                <ul class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+                                    <li>Penyebaran berita bohong (hoaks) dan disinformasi publik</li>
+                                    <li>Penipuan keuangan dengan kloning identitas/suara</li>
+                                    <li>Perundungan siber (cyberbullying) & pencemaran nama baik</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Myth vs Fact -->
+                        <div class="p-6 bg-amber-50 rounded-2xl border border-amber-300">
+                            <h4 class="font-extrabold text-amber-950 text-base mb-3 flex items-center">
+                                <i class="fa-solid fa-circle-question text-amber-600 mr-2"></i> Kuis Singkat: Mitos atau Fakta?
+                            </h4>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-white rounded-xl border border-amber-200 flex flex-col sm:flex-row items-center justify-between gap-2">
+                                    <span class="text-xs font-semibold text-slate-800">"Semua gambar hasil buatan AI pasti dinamakan deepfake."</span>
+                                    <button onclick="alert('JAWABAN: MITOS!\n\nGambar AI generatif yang dibuat dari prompt teks bukan deepfake kecuali gambar tersebut meniru/merekayasa identitas foto orang asli.')" class="bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold px-4 py-1.5 rounded-lg text-xs transition">
+                                        Cek Jawaban
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 text-right">
+                            <button onclick="navigateTo('praktik-ai')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl shadow transition">
+                                Lanjut ke Praktik Gambar AI <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 7: PRAKTIK MEMBUAT GAMBAR AI -->
+            <section id="sec-praktik-ai" class="hidden space-y-6">
+                <div class="bg-white p-6 lg:p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-2xl flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">Tahap 5: Praktik Membuat Gambar AI (Etis)</h2>
+                                <p class="text-xs text-slate-500">Menggunakan Tool Generatif dengan Prompt Fiktif</p>
+                            </div>
+                        </div>
+                        <span class="bg-pink-100 text-pink-800 text-xs font-bold px-3 py-1 rounded-full">Durasi: 12 Menit</span>
+                    </div>
+
+                    <!-- Platform Buttons -->
+                    <div class="grid md:grid-cols-2 gap-4 mb-6">
+                        <div class="p-5 border border-slate-200 rounded-2xl hover:border-blue-400 transition bg-slate-50">
+                            <h3 class="font-bold text-slate-800 text-base mb-2"><i class="fa-brands fa-microsoft text-blue-600 mr-2"></i> Pilihan 1: Bing Image Creator</h3>
+                            <p class="text-xs text-slate-600 mb-4">Platform pembuat gambar berbasis DALL-E dari Microsoft.</p>
+                            <a href="https://www.bing.com/images/create/ai-image-generator" target="_blank" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow">
+                                Buka Bing Image Creator <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                            </a>
+                        </div>
+                        <div class="p-5 border border-slate-200 rounded-2xl hover:border-purple-400 transition bg-slate-50">
+                            <h3 class="font-bold text-slate-800 text-base mb-2"><i class="fa-brands fa-google text-purple-600 mr-2"></i> Pilihan 2: Gemini AI</h3>
+                            <p class="text-xs text-slate-600 mb-4">Platform AI generatif multiguna resmi dari Google.</p>
+                            <a href="https://gemini.google.com/" target="_blank" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow">
+                                Buka Gemini AI <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Sample Prompt Box -->
+                    <div class="bg-blue-900 text-white p-5 rounded-2xl space-y-3 mb-6">
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-amber-300 text-xs uppercase tracking-wider"><i class="fa-solid fa-copy mr-1"></i> Prompt Praktik Aman (Fiktif Edukatif)</span>
+                            <button onclick="copyPromptText()" class="bg-amber-400 hover:bg-amber-300 text-blue-950 font-bold px-3 py-1 rounded-lg text-xs transition">
+                                <i class="fa-regular fa-copy mr-1"></i> Salin Prompt
+                            </button>
+                        </div>
+                        <p id="promptText" class="text-xs font-mono bg-blue-950 p-3 rounded-xl leading-relaxed text-blue-100 border border-blue-800">
+"Buat ilustrasi edukatif bergaya fotografi realistis tentang seorang astronot fiktif sedang mengamati planet di laboratorium luar angkasa. Gunakan pencahayaan alami, detail lingkungan yang konsisten, komposisi rapi, dan kualitas tinggi. Karakter sepenuhnya fiktif, bukan orang nyata. Beri label visual 'ILUSTRASI BUATAN AI'."
+                        </p>
+                    </div>
+
+                    <!-- Worksheet Form -->
+                    <div class="space-y-4 border border-slate-200 p-5 rounded-2xl bg-slate-50">
+                        <h3 class="font-bold text-slate-800 text-sm">Lembar Laporan Hasil Praktik AI Kelompok:</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Platform Digunakan</label>
+                                <select id="praktikPlatform" class="w-full p-2.5 rounded-xl border text-xs">
+                                    <option value="Bing Image Creator">Bing Image Creator</option>
+                                    <option value="Gemini AI">Gemini AI</option>
+                                    <option value="Alternatif Lain">Alternatif / Contoh Gambar Guru</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Apakah Diberi Label AI?</label>
+                                <select id="praktikLabel" class="w-full p-2.5 rounded-xl border text-xs">
+                                    <option value="Ya, Sudah Berlabel AI">Ya, Sudah Berlabel AI</option>
+                                    <option value="Belum, Perlu Ditambah Manual">Belum, Perlu Ditambah Manual</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Deskripsi Hasil Gambar Generatif</label>
+                            <textarea id="praktikDeskripsi" rows="2" class="w-full p-3 text-xs rounded-xl border" placeholder="Jelaskan objek dan detail gambar hasil buatan AI..."></textarea>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Bagian yang Terlihat Sangat Realistis</label>
+                                <input type="text" id="praktikRealistis" class="w-full p-2.5 rounded-xl border text-xs" placeholder="Misal: pencahayaan helm, warna planet...">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Bagian yang Tampak Janggal / Aneh</label>
+                                <input type="text" id="praktikJanggal" class="w-full p-2.5 rounded-xl border text-xs" placeholder="Misal: bentuk jari tangan, tekstur baju...">
+                            </div>
+                        </div>
+
+                        <button onclick="savePraktik()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow transition">
+                            <i class="fa-solid fa-check mr-1"></i> Simpan Laporan Praktik
+                        </button>
+                    </div>
+
+                    <div class="pt-4 text-right">
+                        <button onclick="navigateTo('deteksi-ai')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl shadow transition">
+                            Lanjut ke Deteksi Gambar AI <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 8: DETEKSI GAMBAR AI -->
+            <section id="sec-deteksi-ai" class="hidden space-y-6">
+                <div class="bg-white p-6 lg:p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-magnifying-glass-chart"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">Tahap 6: Pembuktian Deteksi Gambar AI</h2>
+                                <p class="text-xs text-slate-500">Pemeriksaan Manual & Uji Tool AI Detector</p>
+                            </div>
+                        </div>
+                        <span class="bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full">Durasi: 8 Menit</span>
+                    </div>
+
+                    <div class="mb-6 p-4 bg-teal-50 rounded-2xl border border-teal-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <div>
+                            <h3 class="font-bold text-teal-900 text-sm">Tool Pendeteksi Digital External: Hive Moderation AI Detector</h3>
+                            <p class="text-xs text-teal-800">Gunakan tautan alat di bawah untuk menguji persentase AI gambar secara gratis.</p>
+                        </div>
+                        <a href="https://hivemoderation.com/ai-generated-content-detection" target="_blank" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow flex-shrink-0">
+                            Buka AI Image Detector <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                        </a>
+                    </div>
+
+                    <!-- Manual Checklist Table -->
+                    <div class="space-y-4">
+                        <h3 class="font-bold text-slate-800 text-sm">A. Tabel Analisis Pemeriksaan Manual Detektif:</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse border border-slate-200 rounded-xl overflow-hidden text-xs">
+                                <thead class="bg-slate-100 text-slate-700 font-bold">
+                                    <tr>
+                                        <th class="p-3 border border-slate-200">Indikator Pemeriksaan Visual</th>
+                                        <th class="p-3 border border-slate-200">Hasil Pengamatan</th>
+                                        <th class="p-3 border border-slate-200">Bukti Detail yang Ditemukan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-slate-50">
+                                        <td class="p-3 border font-semibold">1. Detail Mata, Jari & Telinga</td>
+                                        <td class="p-3 border">
+                                            <select id="detEyeResult" class="w-full p-1 rounded border">
+                                                <option value="Normal">Normal & Konsisten</option>
+                                                <option value="Janggal">Janggal / Cacat AI</option>
+                                            </select>
+                                        </td>
+                                        <td class="p-3 border"><input type="text" id="detEyeDetail" placeholder="Misal: jumlah jari 6 atau mata asimetris" class="w-full p-1 border rounded"></td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50">
+                                        <td class="p-3 border font-semibold">2. Pencahayaan & Bayangan</td>
+                                        <td class="p-3 border">
+                                            <select id="detLightResult" class="w-full p-1 rounded border">
+                                                <option value="Alami">Alami / Sesuai Arah</option>
+                                                <option value="Tak Logis">Bayangan Tidak Logis</option>
+                                            </select>
+                                        </td>
+                                        <td class="p-3 border"><input type="text" id="detLightDetail" placeholder="Misal: arah sumber cahaya bertabrakan" class="w-full p-1 border rounded"></td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50">
+                                        <td class="p-3 border font-semibold">3. Teks, Tulisan & Pola Simetris</td>
+                                        <td class="p-3 border">
+                                            <select id="detTextResult" class="w-full p-1 rounded border">
+                                                <option value="Jelas">Jelas / Terbaca</option>
+                                                <option value="Acak-Abrakadabra">Tulisan Acak / Hancur</option>
+                                            </select>
+                                        </td>
+                                        <td class="p-3 border"><input type="text" id="detTextDetail" placeholder="Misal: huruf di poster tidak memiliki arti" class="w-full p-1 border rounded"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Digital Tool Result Record -->
+                    <div class="space-y-4 pt-4">
+                        <h3 class="font-bold text-slate-800 text-sm">B. Catatan Hasil Uji Alat Digital Pendeteksi:</h3>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Nama Alat Digunakan</label>
+                                <input type="text" id="toolNameInput" value="Hive Moderation / Manual Check" class="w-full p-2.5 rounded-xl border text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Skor / Persentase AI (%)</label>
+                                <input type="text" id="toolScoreInput" placeholder="Contoh: 98.4% AI Generated" class="w-full p-2.5 rounded-xl border text-xs">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Kesimpulan Akhir Gambar</label>
+                                <select id="detFinalConclusion" class="w-full p-2.5 rounded-xl border text-xs font-bold text-blue-900">
+                                    <option value="Kemungkinan AI / Deepfake">Kemungkinan Gambar AI / Deepfake</option>
+                                    <option value="Kemungkinan Foto Asli">Kemungkinan Foto Asli</option>
+                                    <option value="Belum Cukup Bukti">Belum Cukup Bukti</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-2 text-right">
+                        <button onclick="saveDeteksi()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow transition">
+                            <i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Pembuktian Deteksi
+                        </button>
+                    </div>
+
+                    <div class="pt-4 text-right border-t">
+                        <button onclick="navigateTo('game')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl shadow transition">
+                            Lanjut ke Game Fakta atau AI <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 9: GAME INTERAKTIF FAKTA ATAU AI -->
+            <section id="sec-game" class="hidden space-y-6">
+                <div class="bg-white p-6 lg:p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-gamepad"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">Game Interaktif: Fakta atau AI?</h2>
+                                <p class="text-xs text-slate-500">Uji Ketelitian Mata Detektifmu pada 6 Gambar Tantangan</p>
+                            </div>
+                        </div>
+                        <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1 rounded-full">Durasi: 8 Menit</span>
+                    </div>
+
+                    <!-- Game Container Card -->
+                    <div class="bg-slate-900 rounded-3xl p-6 text-white max-w-3xl mx-auto shadow-2xl border-4 border-blue-600">
+                        <!-- Top Game Bar -->
+                        <div class="flex justify-between items-center mb-4 pb-4 border-b border-slate-800">
+                            <div class="flex items-center space-x-2">
+                                <i class="fa-solid fa-trophy text-yellow-400 text-xl"></i>
+                                <span class="text-sm font-bold">Skor Game: <span id="gameCurrentScore" class="text-yellow-400 text-lg">0</span> / 60</span>
+                            </div>
+                            <span id="gameStepIndicator" class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                Gambar 1 dari 6
+                            </span>
+                        </div>
+
+                        <!-- Image Display Area -->
+                        <div class="relative bg-slate-950 rounded-2xl p-2 mb-4 overflow-hidden min-h-[250px] flex items-center justify-center border border-slate-800">
+                            <img id="gameImage" src="" alt="Gambar Tantangan Game" class="max-h-80 w-auto object-contain rounded-xl shadow">
+                            
+                            <!-- Fallback Container if Image Breaks -->
+                            <div id="gameImageFallback" class="hidden text-center p-6 space-y-3">
+                                <i class="fa-solid fa-image-slash text-red-400 text-4xl"></i>
+                                <p class="text-xs text-slate-400">Gambar dari sumber luar tidak dapat dimuat langsung.</p>
+                                <a id="gameSourceBtn" href="#" target="_blank" class="inline-block bg-blue-600 text-white text-xs px-4 py-2 rounded-lg font-bold">
+                                    <i class="fa-solid fa-external-link mr-1"></i> Buka Link Sumber Gambar Original
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Clue Button & Clue Box -->
+                        <div class="mb-4">
+                            <button onclick="toggleGameClue()" class="text-xs bg-slate-800 hover:bg-slate-700 text-yellow-300 px-3 py-1.5 rounded-lg border border-slate-700 font-semibold transition">
+                                <i class="fa-solid fa-lightbulb mr-1"></i> Lihat Petunjuk Pengamatan
+                            </button>
+                            <div id="gameClueText" class="hidden mt-2 p-3 bg-amber-950/60 border border-amber-600/50 rounded-xl text-xs text-amber-200">
+                                <!-- JS Clue -->
+                            </div>
+                        </div>
+
+                        <!-- Decision Buttons -->
+                        <div id="gameActionButtons" class="grid grid-cols-3 gap-3 mb-4">
+                            <button onclick="answerGame('Asli')" class="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3 rounded-xl transition text-xs sm:text-sm shadow">
+                                <i class="fa-solid fa-camera mr-1"></i> Kemungkinan Asli
+                            </button>
+                            <button onclick="answerGame('AI')" class="bg-red-600 hover:bg-red-500 text-white font-extrabold py-3 rounded-xl transition text-xs sm:text-sm shadow">
+                                <i class="fa-solid fa-robot mr-1"></i> Kemungkinan AI
+                            </button>
+                            <button onclick="answerGame('Belum Yakin')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold py-3 rounded-xl transition text-xs sm:text-sm shadow">
+                                <i class="fa-solid fa-question mr-1"></i> Belum Yakin
+                            </button>
+                        </div>
+
+                        <!-- Educational Feedback Modal Box -->
+                        <div id="gameFeedbackBox" class="hidden p-4 bg-slate-800 rounded-xl border border-blue-500 space-y-3">
+                            <h4 id="gameFeedbackTitle" class="font-extrabold text-sm"></h4>
+                            <p id="gameFeedbackBody" class="text-xs leading-relaxed text-slate-300"></p>
+                            <button onclick="nextGameStep()" class="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold py-2.5 rounded-xl transition text-xs uppercase tracking-wider">
+                                Lanjut ke Gambar Berikutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+
+                        <!-- Game Finish State -->
+                        <div id="gameFinishState" class="hidden text-center py-6 space-y-4">
+                            <div class="w-20 h-20 bg-yellow-400 text-slate-950 rounded-full flex items-center justify-center text-4xl mx-auto font-black shadow-lg">
+                                <i class="fa-solid fa-trophy"></i>
+                            </div>
+                            <h3 class="text-2xl font-extrabold text-white">Tantangan Game Selesai!</h3>
+                            <p class="text-sm text-slate-300">Skor Total Detektifmu: <span id="gameFinalScoreDisplay" class="text-yellow-400 font-bold text-xl">0</span> / 60 Poin</p>
+                            <div class="pt-2 flex justify-center gap-3">
+                                <button onclick="resetGame()" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-4 py-2 rounded-xl text-xs transition">
+                                    <i class="fa-solid fa-rotate-right mr-1"></i> Main Lagi
+                                </button>
+                                <button onclick="navigateTo('presentasi')" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-6 py-2 rounded-xl text-xs transition">
+                                    Lanjut ke Presentasi Kelompok <i class="fa-solid fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 10: DISKUSI DAN PRESENTASI KELOMPOK -->
+            <section id="sec-presentasi" class="hidden space-y-6">
+                <div class="bg-white p-6 lg:p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-users-rectangle"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">Tahap 7: Ruang Kolaborasi & Presentasi Kelompok</h2>
+                                <p class="text-xs text-slate-500">Penyusunan Draf Presentasi Hasil Temuan Detektif</p>
+                            </div>
+                        </div>
+                        <span class="bg-sky-100 text-sky-800 text-xs font-bold px-3 py-1 rounded-full">Durasi: 5 Menit</span>
+                    </div>
+
+                    <!-- Presentation Structure Guide -->
+                    <div class="bg-sky-50 border border-sky-200 p-5 rounded-2xl space-y-3 mb-6">
+                        <h3 class="font-bold text-sky-900 text-sm flex items-center">
+                            <i class="fa-solid fa-rectangle-list text-sky-600 mr-2"></i> Kerangka Struktur Presentasi Kelompok di Depan Kelas:
+                        </h3>
+                        <ol class="text-xs text-sky-950 space-y-1 list-decimal list-inside font-medium">
+                            <li>Gambar / Kasus yang Kami Analisis</li>
+                            <li>Dugaan Awal (Hipotesis) Kelompok</li>
+                            <li>Bukti Hasil Pengamatan Visual Manual</li>
+                            <li>Hasil Pemeriksaan Alat Deteksi Digital</li>
+                            <li>Kesimpulan Akhir Status Gambar</li>
+                            <li>Sikap & Rekomendasi Etika Sebelum Membagikan Konten</li>
+                        </ol>
+                    </div>
+
+                    <!-- Rubrik Penilaian Card -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                            <span class="text-lg font-extrabold text-blue-600">40%</span>
+                            <p class="text-xs font-bold text-slate-700">Ketepatan Analisis</p>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                            <span class="text-lg font-extrabold text-amber-600">30%</span>
+                            <p class="text-xs font-bold text-slate-700">Kualitas Bukti & Alasan</p>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                            <span class="text-lg font-extrabold text-emerald-600">15%</span>
+                            <p class="text-xs font-bold text-slate-700">Kolaborasi Kelompok</p>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-center">
+                            <span class="text-lg font-extrabold text-purple-600">15%</span>
+                            <p class="text-xs font-bold text-slate-700">Komunikasi Penyampaian</p>
+                        </div>
+                    </div>
+
+                    <!-- Draft Form -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-700 mb-1">Rekomendasi Etika Kelompok Sebelum Membagikan Konten Kontroversial:</label>
+                            <textarea id="presentasiRekomendasi" rows="3" class="w-full p-3 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Tuliskan 2-3 poin sikap etis kelompokmu..."></textarea>
+                        </div>
+                        <button onclick="savePresentasi()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow transition">
+                            <i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Draf Presentasi
+                        </button>
+                    </div>
+
+                    <div class="pt-4 text-right border-t">
+                        <button onclick="navigateTo('kuis')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl shadow transition">
+                            Lanjut ke Kuis Formatif (10 Soal) <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 11: KUIS FORMATIF INTERAKTIF -->
+            <section id="sec-kuis" class="hidden space-y-6">
+                <div class="bg-white p-6 lg:p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">Tahap 8: Kuis Formatif Interaktif (10 Soal HOTS)</h2>
+                                <p class="text-xs text-slate-500">Uji Pemahaman Konsep, Etika & Deteksi Deepfake</p>
+                            </div>
+                        </div>
+                        <span class="bg-purple-100 text-purple-800 text-xs font-bold px-3 py-1 rounded-full">Durasi: 10 Menit</span>
+                    </div>
+
+                    <!-- Quiz Area Container -->
+                    <div id="quizContainer" class="space-y-6 max-w-3xl mx-auto">
+                        <!-- Progress Header -->
+                        <div class="flex justify-between items-center text-xs font-bold text-slate-600 pb-2 border-b">
+                            <span>Soal <span id="quizCurrentNum">1</span> dari 10</span>
+                            <span>Skor Kuis: <span id="quizScoreDisplay" class="text-purple-600">0</span> / 100</span>
+                        </div>
+
+                        <!-- Question Box -->
+                        <div class="p-6 bg-purple-50/60 rounded-2xl border border-purple-200 space-y-4">
+                            <h3 id="quizQuestionText" class="text-base font-extrabold text-slate-800 leading-snug">
+                                <!-- Quiz Question Text JS -->
+                            </h3>
+
+                            <div id="quizOptionsContainer" class="space-y-2.5">
+                                <!-- Quiz Options JS -->
+                            </div>
+                        </div>
+
+                        <!-- Quiz Explanation Box (Shown after answering) -->
+                        <div id="quizExplanationBox" class="hidden p-4 rounded-xl border text-xs leading-relaxed">
+                            <h4 id="quizExpTitle" class="font-bold mb-1"></h4>
+                            <p id="quizExpText"></p>
+                        </div>
+
+                        <!-- Next Quiz Button -->
+                        <div class="flex justify-end">
+                            <button id="btnNextQuiz" onclick="nextQuizQuestion()" class="hidden bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-2.5 rounded-xl shadow text-xs transition">
+                                Soal Berikutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Result Summary (Hidden initially) -->
+                    <div id="quizResultSummary" class="hidden text-center py-8 space-y-4 max-w-xl mx-auto">
+                        <div class="w-24 h-24 bg-gradient-to-tr from-purple-600 to-indigo-600 text-amber-300 rounded-full flex items-center justify-center text-5xl mx-auto shadow-xl pulse-glow">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-slate-800">Hasil Evaluasi Kuis Detektif</h3>
+                        
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-2">
+                            <p class="text-xs text-slate-500 uppercase font-bold tracking-wider">Nilai Akhir Kuis</p>
+                            <p class="text-5xl font-black text-purple-700" id="quizFinalScoreNum">0</p>
+                            <p class="text-sm font-bold text-slate-700" id="quizCategoryBadge">Kategori: -</p>
+                            <p class="text-xs text-slate-500" id="quizCorrectCountText">Benar 0 dari 10 soal</p>
+                        </div>
+
+                        <div class="pt-3 flex justify-center gap-3">
+                            <button onclick="resetQuiz()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold px-5 py-2.5 rounded-xl text-xs transition">
+                                <i class="fa-solid fa-rotate-right mr-1"></i> Ulangi Kuis
+                            </button>
+                            <button onclick="navigateTo('refleksi')" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs shadow transition">
+                                Lanjut ke Refleksi AHA! <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 12: REFLEKSI AHA! -->
+            <section id="sec-refleksi" class="hidden space-y-6">
+                <div class="bg-white p-6 lg:p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">Tahap 9: Refleksi AHA! (Merefleksi)</h2>
+                                <p class="text-xs text-slate-500">Evaluasi Diri & Pemahaman Bermakna Pembelajaran</p>
+                            </div>
+                        </div>
+                        <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full">Durasi: 7 Menit</span>
+                    </div>
+
+                    <!-- Robot Congratulations Header -->
+                    <div class="bg-gradient-to-r from-amber-400 to-yellow-300 p-6 rounded-2xl text-slate-950 flex items-center space-x-4 shadow-sm mb-6">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-3xl text-blue-900 shadow font-bold flex-shrink-0 robot-bounce">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-lg leading-snug">"Hebat sekali, Detektif Muda!"</h3>
+                            <p class="text-xs text-slate-900 mt-1">Kamu telah menyelesaikan seluruh tahapan eksplorasi teknologi deepfake hari ini.</p>
+                        </div>
+                    </div>
+
+                    <!-- Open Prompts -->
+                    <div class="space-y-4 mb-6">
+                        <h3 class="font-bold text-slate-800 text-sm">A. Kalimat Pemantik Refleksi AHA!:</h3>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1 font-bold">"Hal baru yang paling berharga yang saya pahami hari ini adalah..."</label>
+                            <textarea id="refPahami" rows="2" class="w-full p-3 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Tuliskan pengalaman baru..."></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1 font-bold">"Sebelum membagikan gambar atau video di media sosial, saya akan..."</label>
+                            <textarea id="refSikap" rows="2" class="w-full p-3 text-xs rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Tuliskan tindakan kehati-hatianmu..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Self Rating Survey -->
+                    <div class="space-y-3 mb-6 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                        <h3 class="font-bold text-slate-800 text-sm">B. Evaluasi Diri Detektif:</h3>
+                        
+                        <div class="space-y-2 text-xs">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-2.5 bg-white rounded-xl border">
+                                <span>1. Saya memahami konsep pengertian deepfake dan AI generatif.</span>
+                                <select id="rate1" class="mt-1 sm:mt-0 p-1 border rounded font-semibold text-blue-900">
+                                    <option value="Sudah Paham">Sudah Paham</option>
+                                    <option value="Mulai Paham">Mulai Paham</option>
+                                    <option value="Masih Perlu Bantuan">Masih Perlu Bantuan</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-2.5 bg-white rounded-xl border">
+                                <span>2. Saya dapat mengamati kejanggalan ciri visual gambar AI.</span>
+                                <select id="rate2" class="mt-1 sm:mt-0 p-1 border rounded font-semibold text-blue-900">
+                                    <option value="Sudah Paham">Sudah Paham</option>
+                                    <option value="Mulai Paham">Mulai Paham</option>
+                                    <option value="Masih Perlu Bantuan">Masih Perlu Bantuan</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between p-2.5 bg-white rounded-xl border">
+                                <span>3. Saya selalu meminta izin sebelum menggunakan foto orang lain.</span>
+                                <select id="rate3" class="mt-1 sm:mt-0 p-1 border rounded font-semibold text-blue-900">
+                                    <option value="Sudah Paham">Sudah Paham</option>
+                                    <option value="Mulai Paham">Mulai Paham</option>
+                                    <option value="Masih Perlu Bantuan">Masih Perlu Bantuan</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="saveRefleksi()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow transition">
+                        <i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Refleksi AHA!
+                    </button>
+
+                    <div class="pt-4 text-right border-t">
+                        <button onclick="navigateTo('penutup')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl shadow transition">
+                            Lanjut ke Kegiatan Penutup <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 13: KEGIATAN PENUTUP -->
+            <section id="sec-penutup" class="hidden space-y-6">
+                <div class="bg-white p-6 lg:p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex justify-between items-start mb-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-flag-checkered"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">Tahap 10: Kegiatan Penutup Pembelajaran</h2>
+                                <p class="text-xs text-slate-500">Rangkuman Akhir & Tugas Lanjutan Pertemuan Berikutnya</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 text-white p-6 rounded-2xl space-y-3 mb-6">
+                        <h3 class="font-extrabold text-amber-300 text-base">Pesan Kunci Detektif AI:</h3>
+                        <p class="text-xs text-slate-200 leading-relaxed italic">
+                            "Teknologi AI adalah alat. Gunakan kreativitasmu untuk berkarya, penalaran kritismu untuk memeriksa bukti, dan tanggung jawabmu untuk menjaga sesama."
+                        </p>
+                    </div>
+
+                    <!-- Next Homework Task Box -->
+                    <div class="p-5 border-2 border-dashed border-orange-300 bg-orange-50/50 rounded-2xl space-y-2 mb-6">
+                        <span class="bg-orange-500 text-white text-[10px] font-extrabold px-3 py-1 rounded-full uppercase">Tugas Lanjutan Pertemuan Berikutnya</span>
+                        <h4 class="font-bold text-slate-800 text-sm">Proyek Pembuatan Video AI Fiktif Berlabel:</h4>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            "Buat sebuah konten video AI yang aman, menggunakan karakter fiktif atau bahan yang memiliki izin. Berikan label bahwa video dibuat menggunakan AI, lalu analisis ciri-ciri dan keterbatasan pemeriksaannya."
+                        </p>
+                    </div>
+
+                    <div class="text-center pt-2">
+                        <button onclick="navigateTo('hasil-belajar')" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold px-8 py-3.5 rounded-2xl shadow-lg transition transform hover:scale-105">
+                            <i class="fa-solid fa-file-invoice mr-2"></i> LIHAT REKAP HASIL BELAJAR & KIRIM WA GURU
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 14: HASIL BELAJAR DAN LAPORAN WA SISWA -->
+            <section id="sec-hasil-belajar" class="hidden space-y-6">
+                <div class="bg-white p-6 lg:p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b pb-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-2xl font-bold">
+                                <i class="fa-solid fa-file-invoice"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold text-slate-800">Rekap Laporan Hasil Belajar Siswa</h2>
+                                <p class="text-xs text-slate-500">Laporan Resmi Pembelajaran KKA — SMP Negeri 58 Palembang</p>
+                            </div>
+                        </div>
+
+                        <!-- Action Controls -->
+                        <div class="flex flex-wrap gap-2 no-print">
+                            <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition">
+                                <i class="fa-solid fa-print mr-1"></i> Cetak / PDF
+                            </button>
+                            <button onclick="copySummaryText()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition">
+                                <i class="fa-solid fa-copy mr-1"></i> Salin Ringkasan
+                            </button>
+                            <button onclick="confirmResetAll()" class="bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition">
+                                <i class="fa-solid fa-trash-can mr-1"></i> Reset Data
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Print Header (Visible only when printed) -->
+                    <div class="hidden print-only mb-6 text-center border-b pb-4">
+                        <h1 class="text-xl font-bold uppercase">SMP NEGERI 58 PALEMBANG</h1>
+                        <h2 class="text-sm font-semibold">LAPORAN HASIL PEMBELAJARAN INTERAKTIF KKA - DEEPFAKE</h2>
+                        <p class="text-xs text-slate-500">Mata Pelajaran: Koding dan Kecerdasan Artifisial (KKA) | Kelas VIII Ganjil</p>
+                    </div>
+
+                    <!-- Student Profile Summary Card -->
+                    <div class="grid md:grid-cols-4 gap-4 p-5 bg-slate-50 rounded-2xl border border-slate-200 mb-6">
+                        <div>
+                            <p class="text-[10px] text-slate-400 font-bold uppercase">Nama Siswa</p>
+                            <p class="text-sm font-bold text-slate-800" id="rekapNama">-</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-slate-400 font-bold uppercase">Kelas / No Absen</p>
+                            <p class="text-sm font-bold text-slate-800" id="rekapKelasAbsen">-</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-slate-400 font-bold uppercase">Nama Kelompok</p>
+                            <p class="text-sm font-bold text-slate-800" id="rekapKelompok">-</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-slate-400 font-bold uppercase">Status Penyelesaian</p>
+                            <span class="inline-block bg-emerald-100 text-emerald-800 font-extrabold text-xs px-2.5 py-0.5 rounded-full" id="rekapStatus">Lengkap</span>
+                        </div>
+                    </div>
+
+                    <!-- Scores Summary Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
+                        <div class="p-4 bg-yellow-50 rounded-2xl border border-yellow-200 text-center">
+                            <p class="text-xs text-yellow-800 font-bold">Skor Game Fakta/AI</p>
+                            <p class="text-3xl font-black text-yellow-600 my-1" id="rekapGameScore">0 / 60</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-2xl border border-purple-200 text-center">
+                            <p class="text-xs text-purple-800 font-bold">Nilai Kuis Formatif</p>
+                            <p class="text-3xl font-black text-purple-600 my-1" id="rekapQuizScore">0 / 100</p>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-2xl border border-blue-200 text-center col-span-2 sm:col-span-1">
+                            <p class="text-xs text-blue-800 font-bold">Lencana Pencapaian</p>
+                            <p class="text-sm font-black text-blue-900 my-2" id="rekapBadgeTitle">Detektif AI Berkembang</p>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Data Summary -->
+                    <div class="space-y-4 text-xs">
+                        <div class="p-4 border rounded-xl bg-white space-y-1">
+                            <h4 class="font-bold text-slate-800 text-sm border-b pb-1">1. Stimulus & Identifikasi Masalah</h4>
+                            <p><strong>Hipotesis Awal Stimulus:</strong> <span id="rekapStimulusHypo">-</span></p>
+                            <p><strong>Rumusan Masalah Kelompok:</strong> <span id="rekapRumusan">-</span></p>
+                        </div>
+
+                        <div class="p-4 border rounded-xl bg-white space-y-1">
+                            <h4 class="font-bold text-slate-800 text-sm border-b pb-1">2. Praktik & Deteksi AI</h4>
+                            <p><strong>Platform & Prompt:</strong> <span id="rekapPraktikInfo">-</span></p>
+                            <p><strong>Kesimpulan Deteksi Gambar:</strong> <span id="rekapDeteksiInfo">-</span></p>
+                        </div>
+
+                        <div class="p-4 border rounded-xl bg-white space-y-1">
+                            <h4 class="font-bold text-slate-800 text-sm border-b pb-1">3. Refleksi AHA!</h4>
+                            <p><strong>Pemahaman Baru:</strong> <span id="rekapRefPahami">-</span></p>
+                            <p><strong>Komitmen Sikap:</strong> <span id="rekapRefSikap">-</span></p>
+                        </div>
+                    </div>
+
+                    <!-- WHATSAPP INTEGRATION BOX -->
+                    <div class="mt-8 p-6 bg-gradient-to-r from-emerald-600 to-teal-700 text-white rounded-3xl shadow-xl space-y-4 no-print">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-white text-emerald-600 rounded-full flex items-center justify-center text-2xl font-bold shadow">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-lg">Kirim Hasil Belajar ke WhatsApp Guru</h3>
+                                <p class="text-xs text-emerald-100">Nomor Guru Pembimbing KKA: <span class="font-mono bg-emerald-800 px-2 py-0.5 rounded text-amber-300">081373363236</span></p>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-emerald-50 leading-relaxed">
+                            Tekan tombol di bawah untuk menampilkan pratinjau format pesan laporan ringkas yang siap dikirim langsung ke WhatsApp Bapak/Ibu Guru.
+                        </p>
+
+                        <button onclick="previewWhatsAppMessage()" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black px-6 py-3 rounded-xl shadow-lg transition flex items-center space-x-2 text-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Pratinjau & Kirim ke WhatsApp Guru</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL PRATINJAU PESAN WHATSAPP -->
+    <div id="waModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-slate-800 text-base flex items-center">
+                    <i class="fa-brands fa-whatsapp text-emerald-600 text-xl mr-2"></i> Pratinjau Pesan WA Guru
+                </h3>
+                <button onclick="closeWaModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold">&times;</button>
+            </div>
+
+            <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200 text-xs font-mono text-slate-800 whitespace-pre-wrap max-h-60 overflow-y-auto" id="waPreviewText">
+                <!-- Message preview JS -->
+            </div>
+
+            <div class="flex justify-end space-x-3 pt-2">
+                <button onclick="closeWaModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold px-4 py-2 rounded-xl text-xs transition">
+                    Kembali Edit
+                </button>
+                <button onclick="sendToWhatsAppAction()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2 rounded-xl text-xs shadow-lg transition flex items-center space-x-2">
+                    <span>Kirim Sekarang</span>
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC & STATE MANAGEMENT -->
+    <script>
+        // CONFIGURATION & CONSTANTS
+        const TELEPON_GURU = "081373363236"; // Guru KKA Phone Variable
+        const WA_PHONE_FORMATTED = "6281373363236";
+
+        // APP STATE OBJECT
+        let appState = {
+            identitas: {
+                nama: '',
+                kelas: '',
+                absen: '',
+                kelompok: ''
+            },
+            stimulus: {
+                hypothesis: 'Belum Memilih',
+                meyakinkan: '',
+                kejanggalan: ''
+            },
+            identifikasi: {
+                rumusan: '',
+                hipotesis: ''
+            },
+            praktik: {
+                platform: 'Bing Image Creator',
+                label: 'Ya, Sudah Berlabel AI',
+                deskripsi: '',
+                realistis: '',
+                janggal: ''
+            },
+            deteksi: {
+                eyeResult: 'Normal',
+                eyeDetail: '',
+                lightResult: 'Alami',
+                lightDetail: '',
+                textResult: 'Jelas',
+                textDetail: '',
+                toolName: 'Hive Moderation',
+                toolScore: '',
+                finalConclusion: 'Kemungkinan AI / Deepfake'
+            },
+            game: {
+                currentStep: 0,
+                score: 0,
+                userAnswers: []
+            },
+            presentasi: {
+                rekomendasi: ''
+            },
+            kuis: {
+                currentStep: 0,
+                score: 0,
+                answers: [],
+                completed: false
+            },
+            refleksi: {
+                pahami: '',
+                sikap: '',
+                rate1: 'Sudah Paham',
+                rate2: 'Sudah Paham',
+                rate3: 'Sudah Paham'
+            }
+        };
+
+        // GAME DATA (6 Gambar Sesuai URL Modul)
+        const GAME_DATA = [
+            {
+                id: 1,
+                url: "https://pixabay.com/id/illustrations/ai-dihasilkan-realistis-wanita-asia-8496220/",
+                imgSrc: "https://cdn.pixabay.com/photo/2023/12/08/05/38/ai-generated-8496220_1280.jpg",
+                correct: "AI",
+                clue: "Perhatikan kehalusan kulit wajah, helaian rambut di tepi dahi, dan pola pantulan pupil mata.",
+                explanation: "Gambar ini secara eksplisit dibuat menggunakan algoritma AI generatif fotografi wanita Asia."
+            },
+            {
+                id: 2,
+                url: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Orang_asli.jpg",
+                imgSrc: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Orang_asli.jpg",
+                correct: "Asli",
+                clue: "Amati tekstur pori-pori kulit alami, kerutan baju, dan latar belakang pencahayaan fotografi asli.",
+                explanation: "Gambar ini adalah foto dokumentasi manusia asli (Wikimedia Commons)."
+            },
+            {
+                id: 3,
+                url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6cYRd9USalYtp5VCmpzuQI74t8rZYc8tvN6kL7aIDaw&s=10",
+                imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6cYRd9USalYtp5VCmpzuQI74t8rZYc8tvN6kL7aIDaw&s=10",
+                correct: "AI",
+                clue: "Perhatikan detail jari tangan atau batas simetri wajah yang terlalu halus tidak wajar.",
+                explanation: "Hasil rujukan menunjukkan gambar ini dibuat dengan alat AI generatif modern."
+            },
+            {
+                id: 4,
+                url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzcIbQ6_MPPiBigoH_BX7Xvtnu7IDxpNfIgFY4bGgpZQ&s=10",
+                imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzcIbQ6_MPPiBigoH_BX7Xvtnu7IDxpNfIgFY4bGgpZQ&s=10",
+                correct: "AI",
+                clue: "Amati tekstur latar belakang dan pencahayaan objek utama yang tampak terlalu fantastis.",
+                explanation: "Gambar ini dikonfirmasi sebagai hasil karya AI generatif sintetis."
+            },
+            {
+                id: 5,
+                url: "https://id.pikbest.com/photo/realistic-nature-landscape-wallpaper-green-tree-house-hills-ai-generated-image_10663533.html",
+                imgSrc: "https://placehold.co/600x400/1565C0/FFFFFF?text=Pikbest+AI+Landscape+House",
+                correct: "AI",
+                clue: "Perhatikan susunan daun dan kontur bukit lanskap alam buatan komputer.",
+                explanation: "Sumber Pikbest secara terang mencantumkan lisensi AI-generated image pada lanskap ini."
+            },
+            {
+                id: 6,
+                url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4WQjL8wBd6KVT8IFBVbRygmcbQ6x7TEWj_CGleLO9Jg&s=10",
+                imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4WQjL8wBd6KVT8IFBVbRygmcbQ6x7TEWj_CGleLO9Jg&s=10",
+                correct: "Asli",
+                clue: "Amati detail kamera alami dan noise pencahayaan lingkungan asli.",
+                explanation: "Merupakan jepretan foto kamera asli tanpa manipulasi AI deepfake."
+            }
+        ];
+
+        // 10 KUIS FORMATIF HOTS DATA
+        const QUIZ_DATA = [
+            {
+                q: "1. Rani menerima video viral di media sosial yang memperlihatkan seorang tokoh terkenal mengucapkan pidato mengejutkan. Video terlihat sangat mulus, namun Rani tidak menemukan berita tersebut di portal resmi media mana pun. Apa langkah yang paling etis dan kritis?",
+                options: [
+                    "A. Membagikan video ke grup keluarga agar semua orang tahu.",
+                    "B. Menganggap video pasti asli karena gerakan wajah terlihat nyata.",
+                    "C. Memeriksa sumber berita tepercaya, mencari pembanding, dan menunda menyebarkan video.",
+                    "D. Menganggap video pasti bohong tanpa perlu melakukan klarifikasi."
+                ],
+                answer: 2, // Index C
+                exp: "Keterampilan penalaran kritis mewajibkan kita memverifikasi sumber berita resmi dan menunda penyebaran sebelum ada bukti sahih."
+            },
+            {
+                q: "2. Pernyataan manakah yang paling tepat menjelaskan perbedaan antara gambar AI generatif umum dengan Deepfake?",
+                options: [
+                    "A. AI generatif membuat gambar dari prompt teks (karakter fiktif), sedangkan deepfake secara spesifik memanipulasi identitas/wajah orang asli.",
+                    "B. AI generatif selalu berbentuk video, sedangkan deepfake selalu berbentuk foto diam.",
+                    "C. Deepfake hanya bisa dibuat di komputer lab, sedangkan AI generatif bisa di HP.",
+                    "D. Tidak ada perbedaan sama sekali, kedua istilah memiliki arti yang 100% sama."
+                ],
+                answer: 0,
+                exp: "Deepfake difokuskan pada manipulasi atau pertukaran identitas nyata seseorang, sedangkan gambar AI generatif dapat berupa objek fiktif penuh."
+            },
+            {
+                q: "3. Saat melakukan analisis visual manual pada gambar yang dicurigai buatan AI, bagian mana yang sering menunjukkan kejanggalan utama?",
+                options: [
+                    "A. Warna latar belakang utama.",
+                    "B. Detail jemari tangan, bentuk telinga, aksesoris simetris, dan tekstur pola tulisan.",
+                    "C. Ukuran file gambar saat diunduh.",
+                    "D. Format file ekstensi JPG atau PNG."
+                ],
+                answer: 1,
+                exp: "Model AI sering kesulitan merender geometri kompleks seperti jumlah jari tangan, lekuk telinga, dan tulisan teks yang presisi."
+            },
+            {
+                q: "4. Apakah hasil persentase dari aplikasi web AI Detector (seperti Hive Moderation) dapat dijadikan bukti mutlak 100% di pengadilan hukum?",
+                options: [
+                    "A. Ya, karena mesin komputer tidak pernah salah.",
+                    "B. Tidak, karena alat deteksi AI memiliki keterbatasan, kemungkinan false positive/negative, dan membutuhkan bukti pendukung lain.",
+                    "C. Ya, asal aplikasinya berbayar mahal.",
+                    "D. Tidak, karena aplikasi deteksi AI dibuat hanya untuk mainan."
+                ],
+                answer: 1,
+                exp: "Alat detektor AI memberikan estimasi indikasi probabilistik dan tidak bisa menjadi satu-satunya pembuktian mutlak tanpa korelasi fakta lapangan."
+            },
+            {
+                q: "5. Manakah tindakan yang MELANGGAR etika dan hukum saat memanfaatkan teknologi manipulasi AI?",
+                options: [
+                    "A. Membuat foto astronot fiktif di ruang angkasa untuk tugas sekolah.",
+                    "B. Menempelkan wajah teman kelas ke video komedi tanpa persetujuan/izin teman tersebut.",
+                    "C. Merestorasi foto tua kakek sendiri yang sudah pudar.",
+                    "D. Memberikan label visual 'ILUSTRASI BUATAN AI' pada postingan karya seni."
+                ],
+                answer: 1,
+                exp: "Menggunakan identitas atau foto wajah orang lain tanpa izin resmi melanggar hak privasi dan etika digital."
+            },
+            {
+                q: "6. Mengapa penting untuk memberikan label jelas seperti 'DIHASILKAN OLEH AI' pada karya yang kita buat dengan kecerdasan buatan?",
+                options: [
+                    "A. Agar nilai kuis sekolah kita otomatis 100.",
+                    "B. Menjaga transparansi publik dan mencegah kesalahpahaman atau penipuan visual bagi audiens.",
+                    "C. Agar gambar kita tidak bisa disimpan orang lain.",
+                    "D. Syarat wajib agar komputer lab tidak rusak."
+                ],
+                answer: 1,
+                exp: "Pelabelan transparan adalah standar etika global untuk membedakan hasil karya asli dengan rekayasa teknologi sintetis."
+            },
+            {
+                q: "7. Salah satu manfaat positif penerapan teknologi Deepfake atau AI visual dalam dunia pendidikan adalah...",
+                options: [
+                    "A. Membuat video palsu guru untuk meliburkan sekolah.",
+                    "B. Memvisualisasikan kembali pahlawan sejarah fiktif/simulasi interaktif dalam pelajaran sejarah.",
+                    "C. Memalsukan tanda tangan digital pada rapor.",
+                    "D. Menyebar rumor tentang sekolah lain."
+                ],
+                answer: 1,
+                exp: "Manfaat edukatif AI meliputi rekreasi visual sejarah, simulasi pendidikan, dan industri efek kreatif film."
+            },
+            {
+                q: "8. Jika kamu mendapatkan rekaman suara pesan singkat dari nomor tak dikenal yang mengaku sebagai temanmu meminta transfer uang, apa tindakan kritis pertama?",
+                options: [
+                    "A. Langsung menransfer uang karena suaranya sangat mirip.",
+                    "B. Menghubungi temanmu secara langsung melalui saluran telepon seluler resmi untuk mengonfirmasi.",
+                    "C. Menyebarkan pesan suara itu ke grup sekolah.",
+                    "D. Membalas dengan memarahi nomor tersebut."
+                ],
+                answer: 1,
+                exp: "Kloning suara AI marak digunakan dalam penipuan. Selalu lakukan verifikasi dua arah (cross-check) langsung ke pemilik identitas asli."
+            },
+            {
+                q: "9. Apa yang dimaksud dengan istilah 'Reverse Image Search' (Pencarian Gambar Terbalik)?",
+                options: [
+                    "A. Memutar posisi gambar 180 derajat di aplikasi edit foto.",
+                    "B. Mengunggah gambar ke mesin pencari untuk melacak sumber asli atau kemunculan pertama foto tersebut di internet.",
+                    "C. Mengubah warna foto menjadi hitam putih.",
+                    "D. Menghapus foto dari browser komputer."
+                ],
+                answer: 1,
+                exp: "Reverse Image Search (seperti Google Images / TinEye) berguna menemukan rujukan pertama asal-usul foto sebelum diubah AI."
+            },
+            {
+                q: "10. Setelah mempelajari modul Deepfake ini, sikap detektif digital yang paling utama adalah...",
+                options: [
+                    "A. Takut menggunakan internet dan komputer sama sekali.",
+                    "B. Bebas membuat video manipulasi siapa saja asal lucu.",
+                    "C. Kritis terhadap informasi, tidak mudah terprovokasi, dan bertanggung jawab menggunakan AI.",
+                    "D. Percaya pada semua foto realistis di media sosial."
+                ],
+                answer: 2,
+                exp: "Sikap akhir pembelajaran adalah membentuk karakter siswa yang bernalar kritis, kreatif, serta bertanggung jawab di era digital."
+            }
+        ];
+
+        // INITIALIZATION ON PAGE LOAD
+        window.onload = function() {
+            loadLocalStorage();
+            updateGlobalProgressBar();
+            setupSidebarToggle();
+            initQuiz();
+            initGame();
+        };
+
+        // NAVIGATION HANDLER
+        function navigateTo(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('main > section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+
+            // Show selected section
+            const target = document.getElementById('sec-' + sectionId);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            // Update active state in sidebar
+            document.querySelectorAll('.nav-item').forEach(item => {
+                if (item.getAttribute('data-section') === sectionId) {
+                    item.classList.add('bg-slate-800', 'text-amber-400', 'font-bold');
+                } else {
+                    item.classList.remove('bg-slate-800', 'text-amber-400', 'font-bold');
+                }
+            });
+
+            // Close sidebar on mobile
+            if (window.innerWidth < 1024) {
+                document.getElementById('sidebar').classList.add('-translate-x-full');
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Refresh rekap if navigating to summary
+            if (sectionId === 'hasil-belajar') {
+                renderSummaryReport();
+            }
+        }
+
+        // SIDEBAR MOBILE TOGGLE
+        function setupSidebarToggle() {
+            const btn = document.getElementById('toggleSidebar');
+            const sidebar = document.getElementById('sidebar');
+            btn.addEventListener('click', () => {
+                sidebar.classList.toggle('-translate-x-full');
+            });
+        }
+
+        // SAVE IDENTITAS SISWA
+        function saveIdentitas(e) {
+            e.preventDefault();
+            appState.identitas.nama = document.getElementById('inputNama').value.trim();
+            appState.identitas.kelas = document.getElementById('inputKelas').value;
+            appState.identitas.absen = document.getElementById('inputAbsen').value;
+            appState.identitas.kelompok = document.getElementById('inputKelompok').value.trim();
+
+            saveLocalStorage();
+            updateStudentProfileUI();
+            updateGlobalProgressBar();
+
+            // Show personal greeting box
+            const greetingBox = document.getElementById('personalGreeting');
+            const greetingText = document.getElementById('greetingText');
+            greetingBox.classList.remove('hidden');
+            greetingText.textContent = `Halo, ${appState.identitas.nama}! Siap menjadi Detektif AI hari ini?`;
+        }
+
+        function updateStudentProfileUI() {
+            const nama = appState.identitas.nama || 'Belum diisi';
+            document.getElementById('sideStudentName').textContent = nama;
+            document.getElementById('sideStudentAvatar').textContent = nama.charAt(0).toUpperCase() || '?';
+        }
+
+        // STIMULUS HYPOTHESIS HANDLER
+        function submitHypothesis(choice) {
+            appState.stimulus.hypothesis = choice;
+            const box = document.getElementById('hypoFeedback');
+            box.classList.remove('hidden');
+            box.innerHTML = `<i class="fa-solid fa-lightbulb text-amber-500 mr-2"></i> Jawaban awalmu adalah: <strong>"${choice}"</strong>. Ini adalah hipotesis awal! Mari kita kumpulkan bukti empiris lanjutan sebelum mengambil kesimpulan mutlak.`;
+            saveLocalStorage();
+            updateGlobalProgressBar();
+        }
+
+        // SAVE IDENTIFIKASI MASALAH
+        function saveIdentifikasi() {
+            appState.identifikasi.rumusan = document.getElementById('rumusanMasalah').value.trim();
+            appState.identifikasi.hipotesis = document.getElementById('hipotesisKelompok').value.trim();
+            saveLocalStorage();
+            updateGlobalProgressBar();
+            alert('Hasil rumusan masalah dan hipotesis kelompok berhasil disimpan!');
+        }
+
+        // PROMPT COPY FEATURE
+        function copyPromptText() {
+            const text = document.getElementById('promptText').innerText;
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            alert('Prompt berhasil disalin ke clipboard!');
+        }
+
+        // SAVE PRAKTIK FORM
+        function savePraktik() {
+            appState.praktik.platform = document.getElementById('praktikPlatform').value;
+            appState.praktik.label = document.getElementById('praktikLabel').value;
+            appState.praktik.deskripsi = document.getElementById('praktikDeskripsi').value;
+            appState.praktik.realistis = document.getElementById('praktikRealistis').value;
+            appState.praktik.janggal = document.getElementById('praktikJanggal').value;
+            saveLocalStorage();
+            updateGlobalProgressBar();
+            alert('Laporan praktik membuat gambar AI berhasil disimpan!');
+        }
+
+        // SAVE DETEKSI FORM
+        function saveDeteksi() {
+            appState.deteksi.eyeResult = document.getElementById('detEyeResult').value;
+            appState.deteksi.eyeDetail = document.getElementById('detEyeDetail').value;
+            appState.deteksi.lightResult = document.getElementById('detLightResult').value;
+            appState.deteksi.lightDetail = document.getElementById('detLightDetail').value;
+            appState.deteksi.textResult = document.getElementById('detTextResult').value;
+            appState.deteksi.textDetail = document.getElementById('detTextDetail').value;
+            appState.deteksi.toolName = document.getElementById('toolNameInput').value;
+            appState.deteksi.toolScore = document.getElementById('toolScoreInput').value;
+            appState.deteksi.finalConclusion = document.getElementById('detFinalConclusion').value;
+            saveLocalStorage();
+            updateGlobalProgressBar();
+            alert('Hasil analisis deteksi gambar berhasil disimpan!');
+        }
+
+        // GAME LOGIC
+        function initGame() {
+            const step = appState.game.currentStep;
+            if (step >= GAME_DATA.length) {
+                renderGameFinish();
+                return;
+            }
+
+            const item = GAME_DATA[step];
+            document.getElementById('gameStepIndicator').textContent = `Gambar ${step + 1} dari 6`;
+            document.getElementById('gameCurrentScore').textContent = appState.game.score;
+
+            const img = document.getElementById('gameImage');
+            const fallback = document.getElementById('gameImageFallback');
+            const srcBtn = document.getElementById('gameSourceBtn');
+
+            img.classList.remove('hidden');
+            fallback.classList.add('hidden');
+
+            img.src = item.imgSrc;
+            img.onerror = function() {
+                img.classList.add('hidden');
+                fallback.classList.remove('hidden');
+                srcBtn.href = item.url;
+            };
+
+            document.getElementById('gameClueText').classList.add('hidden');
+            document.getElementById('gameClueText').textContent = item.clue;
+
+            document.getElementById('gameActionButtons').classList.remove('hidden');
+            document.getElementById('gameFeedbackBox').classList.add('hidden');
+            document.getElementById('gameFinishState').classList.add('hidden');
+        }
+
+        function toggleGameClue() {
+            const clue = document.getElementById('gameClueText');
+            clue.classList.toggle('hidden');
+        }
+
+        function answerGame(choice) {
+            const step = appState.game.currentStep;
+            const item = GAME_DATA[step];
+            let points = 0;
+            let isCorrect = false;
+
+            if (choice === item.correct) {
+                points = 10;
+                isCorrect = true;
+                appState.game.score += 10;
+            }
+
+            appState.game.userAnswers.push({
+                gambarId: item.id,
+                choice: choice,
+                correct: item.correct,
+                points: points
+            });
+
+            document.getElementById('gameCurrentScore').textContent = appState.game.score;
+            document.getElementById('dashScoreDisplay').textContent = `${appState.game.score + appState.kuis.score} / 160`;
+
+            // Feedback Box
+            document.getElementById('gameActionButtons').classList.add('hidden');
+            const fbBox = document.getElementById('gameFeedbackBox');
+            fbBox.classList.remove('hidden');
+
+            const fbTitle = document.getElementById('gameFeedbackTitle');
+            const fbBody = document.getElementById('gameFeedbackBody');
+
+            if (isCorrect) {
+                fbTitle.className = "font-extrabold text-sm text-emerald-400";
+                fbTitle.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> TEPAT sekali! (+10 Poin)`;
+            } else if (choice === 'Belum Yakin') {
+                fbTitle.className = "font-extrabold text-sm text-amber-400";
+                fbTitle.innerHTML = `<i class="fa-solid fa-circle-question mr-1"></i> Ragu-Ragu / Belum Yakin (+0 Poin)`;
+            } else {
+                fbTitle.className = "font-extrabold text-sm text-rose-400";
+                fbTitle.innerHTML = `<i class="fa-solid fa-circle-xmark mr-1"></i> KURANG TEPAT (+0 Poin)`;
+            }
+
+            fbBody.innerHTML = `Jawaban terverifikasi: <strong>${item.correct}</strong>.<br>${item.explanation}`;
+            saveLocalStorage();
+        }
+
+        function nextGameStep() {
+            appState.game.currentStep++;
+            if (appState.game.currentStep >= GAME_DATA.length) {
+                renderGameFinish();
+            } else {
+                initGame();
+            }
+            saveLocalStorage();
+            updateGlobalProgressBar();
+        }
+
+        function renderGameFinish() {
+            document.getElementById('gameActionButtons').classList.add('hidden');
+            document.getElementById('gameFeedbackBox').classList.add('hidden');
+            document.getElementById('gameImage').classList.add('hidden');
+            document.getElementById('gameImageFallback').classList.add('hidden');
+
+            const finishState = document.getElementById('gameFinishState');
+            finishState.classList.remove('hidden');
+            document.getElementById('gameFinalScoreDisplay').textContent = appState.game.score;
+        }
+
+        function resetGame() {
+            appState.game.currentStep = 0;
+            appState.game.score = 0;
+            appState.game.userAnswers = [];
+            initGame();
+            saveLocalStorage();
+            updateGlobalProgressBar();
+        }
+
+        // SAVE PRESENTASI FORM
+        function savePresentasi() {
+            appState.presentasi.rekomendasi = document.getElementById('presentasiRekomendasi').value.trim();
+            saveLocalStorage();
+            updateGlobalProgressBar();
+            alert('Draf rekomendasi etika presentasi berhasil disimpan!');
+        }
+
+        // QUIZ INTERACTIVE LOGIC
+        function initQuiz() {
+            const step = appState.kuis.currentStep;
+            if (step >= QUIZ_DATA.length || appState.kuis.completed) {
+                renderQuizSummary();
+                return;
+            }
+
+            document.getElementById('quizContainer').classList.remove('hidden');
+            document.getElementById('quizResultSummary').classList.add('hidden');
+
+            const qItem = QUIZ_DATA[step];
+            document.getElementById('quizCurrentNum').textContent = step + 1;
+            document.getElementById('quizScoreDisplay').textContent = appState.kuis.score;
+            document.getElementById('quizQuestionText').textContent = qItem.q;
+
+            const optsContainer = document.getElementById('quizOptionsContainer');
+            optsContainer.innerHTML = '';
+
+            document.getElementById('quizExplanationBox').classList.add('hidden');
+            document.getElementById('btnNextQuiz').classList.add('hidden');
+
+            qItem.options.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3.5 rounded-xl border border-purple-200 bg-white hover:bg-purple-100 transition text-xs font-medium text-slate-800 flex items-center justify-between";
+                btn.innerHTML = `<span>${optText}</span> <i class="fa-regular fa-circle text-purple-300 text-base"></i>`;
+                btn.onclick = () => answerQuiz(idx, btn);
+                optsContainer.appendChild(btn);
+            });
+        }
+
+        function answerQuiz(selectedIndex, btnElement) {
+            const step = appState.kuis.currentStep;
+            const qItem = QUIZ_DATA[step];
+
+            // Disable all option buttons
+            const allBtns = document.getElementById('quizOptionsContainer').querySelectorAll('button');
+            allBtns.forEach(b => b.onclick = null);
+
+            let isCorrect = (selectedIndex === qItem.answer);
+            if (isCorrect) {
+                appState.kuis.score += 10;
+                btnElement.className = "w-full text-left p-3.5 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-xs font-bold text-emerald-900 flex items-center justify-between";
+                btnElement.querySelector('i').className = "fa-solid fa-circle-check text-emerald-600 text-base";
+            } else {
+                btnElement.className = "w-full text-left p-3.5 rounded-xl border-2 border-rose-500 bg-rose-50 text-xs font-bold text-rose-900 flex items-center justify-between";
+                btnElement.querySelector('i').className = "fa-solid fa-circle-xmark text-rose-600 text-base";
+
+                // Highlight correct answer
+                allBtns[qItem.answer].className = "w-full text-left p-3.5 rounded-xl border border-emerald-500 bg-emerald-50 text-xs font-bold text-emerald-900 flex items-center justify-between";
+            }
+
+            appState.kuis.answers.push({
+                questionStep: step,
+                selected: selectedIndex,
+                correct: isCorrect
+            });
+
+            document.getElementById('quizScoreDisplay').textContent = appState.kuis.score;
+            document.getElementById('dashScoreDisplay').textContent = `${appState.game.score + appState.kuis.score} / 160`;
+
+            // Explanation Box
+            const expBox = document.getElementById('quizExplanationBox');
+            expBox.classList.remove('hidden');
+            if (isCorrect) {
+                expBox.className = "p-4 rounded-xl border bg-emerald-50 border-emerald-200 text-xs leading-relaxed text-emerald-900";
+                document.getElementById('quizExpTitle').textContent = "Jawaban Benar!";
+            } else {
+                expBox.className = "p-4 rounded-xl border bg-rose-50 border-rose-200 text-xs leading-relaxed text-rose-900";
+                document.getElementById('quizExpTitle').textContent = "Jawaban Kurang Tepat!";
+            }
+            document.getElementById('quizExpText').textContent = qItem.exp;
+
+            document.getElementById('btnNextQuiz').classList.remove('hidden');
+            saveLocalStorage();
+        }
+
+        function nextQuizQuestion() {
+            appState.kuis.currentStep++;
+            if (appState.kuis.currentStep >= QUIZ_DATA.length) {
+                appState.kuis.completed = true;
+                renderQuizSummary();
+            } else {
+                initQuiz();
+            }
+            saveLocalStorage();
+            updateGlobalProgressBar();
+        }
+
+        function renderQuizSummary() {
+            document.getElementById('quizContainer').classList.add('hidden');
+            const summary = document.getElementById('quizResultSummary');
+            summary.classList.remove('hidden');
+
+            const score = appState.kuis.score;
+            document.getElementById('quizFinalScoreNum').textContent = score;
+            document.getElementById('quizCorrectCountText').textContent = `Benar ${score / 10} dari 10 soal`;
+
+            let category = "";
+            let badge = "";
+            if (score >= 90) {
+                category = "Detektif AI Unggul";
+                badge = "Detektif AI Master 🏆";
+            } else if (score >= 80) {
+                category = "Detektif AI Cakap";
+                badge = "Detektif AI Senior 🌟";
+            } else if (score >= 70) {
+                category = "Detektif AI Berkembang";
+                badge = "Detektif AI Junior 🔍";
+            } else {
+                category = "Perlu Latihan Lagi";
+                badge = "Detektif AI Pemula 📚";
+            }
+
+            document.getElementById('quizCategoryBadge').textContent = `Kategori: ${category}`;
+            document.getElementById('dashBadgeDisplay').textContent = badge;
+        }
+
+        function resetQuiz() {
+            appState.kuis.currentStep = 0;
+            appState.kuis.score = 0;
+            appState.kuis.answers = [];
+            appState.kuis.completed = false;
+            initQuiz();
+            saveLocalStorage();
+            updateGlobalProgressBar();
+        }
+
+        // SAVE REFLEKSI FORM
+        function saveRefleksi() {
+            appState.refleksi.pahami = document.getElementById('refPahami').value.trim();
+            appState.refleksi.sikap = document.getElementById('refSikap').value.trim();
+            appState.refleksi.rate1 = document.getElementById('rate1').value;
+            appState.refleksi.rate2 = document.getElementById('rate2').value;
+            appState.refleksi.rate3 = document.getElementById('rate3').value;
+            saveLocalStorage();
+            updateGlobalProgressBar();
+            alert('Jawaban refleksi AHA! berhasil disimpan!');
+        }
+
+        // GLOBAL PROGRESS CALCULATION
+        function updateGlobalProgressBar() {
+            let progress = 5; // Base percentage
+            if (appState.identitas.nama) progress += 15;
+            if (appState.stimulus.hypothesis !== 'Belum Memilih') progress += 10;
+            if (appState.identifikasi.rumusan) progress += 10;
+            if (appState.praktik.deskripsi) progress += 15;
+            if (appState.deteksi.eyeDetail || appState.deteksi.toolScore) progress += 15;
+            if (appState.game.currentStep > 0) progress += 10;
+            if (appState.kuis.completed) progress += 15;
+            if (appState.refleksi.pahami) progress += 5;
+
+            progress = Math.min(progress, 100);
+            const bar = document.getElementById('globalProgressBar');
+            bar.style.width = progress + '%';
+            bar.textContent = progress + '%';
+        }
+
+        // SUMMARY REPORT RENDER
+        function renderSummaryReport() {
+            const id = appState.identitas;
+            document.getElementById('rekapNama').textContent = id.nama || 'Belum diisi';
+            document.getElementById('rekapKelasAbsen').textContent = (id.kelas || '-') + ' / Absen ' + (id.absen || '-');
+            document.getElementById('rekapKelompok').textContent = id.kelompok || '-';
+
+            document.getElementById('rekapGameScore').textContent = `${appState.game.score} / 60`;
+            document.getElementById('rekapQuizScore').textContent = `${appState.kuis.score} / 100`;
+
+            document.getElementById('rekapStimulusHypo').textContent = appState.stimulus.hypothesis;
+            document.getElementById('rekapRumusan').textContent = appState.identifikasi.rumusan || 'Belum diisi';
+
+            document.getElementById('rekapPraktikInfo').textContent = `${appState.praktik.platform} — "${appState.praktik.deskripsi || 'Belum ada deskripsi'}"`;
+            document.getElementById('rekapDeteksiInfo').textContent = `${appState.deteksi.finalConclusion} (${appState.deteksi.toolScore || 'Manual Check'})`;
+
+            document.getElementById('rekapRefPahami').textContent = appState.refleksi.pahami || 'Belum diisi';
+            document.getElementById('rekapRefSikap').textContent = appState.refleksi.sikap || 'Belum diisi';
+
+            document.getElementById('rekapBadgeTitle').textContent = document.getElementById('dashBadgeDisplay').textContent;
+        }
+
+        // WHATSAPP INTEGRATION LOGIC
+        function constructWhatsAppMessage() {
+            const id = appState.identitas;
+            return `LAPORAN PEMBELAJARAN KKA — DEEPFAKE
+SMP Negeri 58 Palembang
+
+Nama: ${id.nama || '-'}
+Kelas: ${id.kelas || '-'}
+Absen: ${id.absen || '-'}
+Kelompok: ${id.kelompok || '-'}
+
+Skor Game: ${appState.game.score}/60
+Nilai Kuis: ${appState.kuis.score}/100
+Hasil Praktik: ${appState.praktik.platform} (${appState.praktik.label})
+Analisis Gambar: ${appState.deteksi.finalConclusion}
+Refleksi AHA!: ${appState.refleksi.pahami || '-'}
+
+Status: Pembelajaran Selesai`;
+        }
+
+        function previewWhatsAppMessage() {
+            if (!appState.identitas.nama) {
+                alert('Mohon isi formulir Identitas Siswa terlebih dahulu sebelum mengirim laporan!');
+                navigateTo('identitas');
+                return;
+            }
+
+            const msg = constructWhatsAppMessage();
+            document.getElementById('waPreviewText').textContent = msg;
+            document.getElementById('waModal').classList.remove('hidden');
+        }
+
+        function closeWaModal() {
+            document.getElementById('waModal').classList.add('hidden');
+        }
+
+        function sendToWhatsAppAction() {
+            const msg = constructWhatsAppMessage();
+            const encodedText = encodeURIComponent(msg);
+            const waUrl = `https://wa.me/${WA_PHONE_FORMATTED}?text=${encodedText}`;
+            window.open(waUrl, '_blank');
+            closeWaModal();
+        }
+
+        function copySummaryText() {
+            const text = constructWhatsAppMessage();
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            alert('Ringkasan laporan berhasil disalin ke clipboard!');
+        }
+
+        // LOCAL STORAGE HELPERS
+        function saveLocalStorage() {
+            try {
+                localStorage.setItem('kka_deepfake_state', JSON.stringify(appState));
+            } catch (e) {
+                console.warn('LocalStorage tidak tersedia.');
+            }
+        }
+
+        function loadLocalStorage() {
+            try {
+                const saved = localStorage.getItem('kka_deepfake_state');
+                if (saved) {
+                    appState = JSON.parse(saved);
+                    // Populate Form Fields if available
+                    if (appState.identitas.nama) {
+                        document.getElementById('inputNama').value = appState.identitas.nama;
+                        document.getElementById('inputKelas').value = appState.identitas.kelas;
+                        document.getElementById('inputAbsen').value = appState.identitas.absen;
+                        document.getElementById('inputKelompok').value = appState.identitas.kelompok;
+                        updateStudentProfileUI();
+                    }
+                    if (appState.identifikasi.rumusan) {
+                        document.getElementById('rumusanMasalah').value = appState.identifikasi.rumusan;
+                        document.getElementById('hipotesisKelompok').value = appState.identifikasi.hipotesis;
+                    }
+                }
+            } catch (e) {
+                console.warn('Gagal membaca LocalStorage.');
+            }
+        }
+
+        function confirmResetAll() {
+            if (confirm('Apakah kamu yakin ingin mereset seluruh data progres pembelajaran komputer ini? Data tidak dapat dikembalikan.')) {
+                localStorage.removeItem('kka_deepfake_state');
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
